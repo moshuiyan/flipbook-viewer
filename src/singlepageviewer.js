@@ -1,8 +1,8 @@
 'use strict'
 import { h } from '@tpp/htm-x';
-import * as EventEmitter from 'events';
+// import * as EventEmitter from 'events';
 
-class SinglePageViewer extends EventEmitter {};
+class SinglePageViewer extends EventTarget {};
 
 /*    way/
  * Set up a viewer container, generate all
@@ -43,7 +43,7 @@ function setupSeenEvents(ctx, viewer) {
           const page = e.target.dataset.flipbookPage;
           if(seen[page]) return;
           seen[page] = true;
-          viewer.emit("seen", page);
+          viewer.dispatchEvent( new CustomEvent("seen", {detail: page}));
         } catch(e) {
           console.error(e);
         }

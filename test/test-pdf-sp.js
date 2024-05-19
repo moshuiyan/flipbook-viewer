@@ -22,7 +22,7 @@ function main() {
     else flipbook.init(book, app, opts, (err, viewer) => {
       if(err) return console.error(err);
 
-      viewer.on('seen', n => console.log('page number: ' + n))
+      viewer.addEventListener('seen', n => console.log('page number: ' + n))
 
       window.viewbook = viewer
     })

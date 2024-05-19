@@ -1,8 +1,8 @@
 'use strict'
 import { h } from '@tpp/htm-x';
-import * as EventEmitter from 'events';
+// import * as EventEmitter from 'events';
 
-class FlipbookViewer extends EventEmitter {};
+class FlipbookViewer extends EventTarget {};
 
 const outputScale = window.devicePixelRatio || 1; // Support HiDPI-screens
 
@@ -298,10 +298,10 @@ function showPages(ctx, viewer) {
   show_bg_1();
   ctx.book.getPage(left_, (err, left) => {
     if(err) return console.error(err);
-    if(!ctx.flipNdx && ctx.flipNdx !== 0 && left) viewer.emit('seen', left_);
+    if(!ctx.flipNdx && ctx.flipNdx !== 0 && left) viewer.dispatchEvent(new CustomEvent( 'seen', {detail :left_}));
     ctx.book.getPage(right_, (err, right) => {
       if(err) return console.error(err);
-      if(!ctx.flipNdx && ctx.flipNdx !== 0 && right) viewer.emit('seen', right_);
+      if(!ctx.flipNdx && ctx.flipNdx !== 0 && right) viewer.dispatchEvent(new CustomEvent('seen', {detail:right_}));
       show_pgs_1(left, right, () => canvas.ctx.restore());
     })
   })

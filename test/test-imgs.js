@@ -33,7 +33,7 @@ function main() {
     else flipbook.init(book, 'app', (err, viewer) => {
       if(err) console.error(err)
 
-      viewer.on('seen', n => console.log('page number: ' + n))
+      viewer.addEventListener('seen', n => console.log('page number: ' + n))
 
       next.onclick = () => viewer.flip_forward();
       prev.onclick = () => viewer.flip_back();

@@ -28,7 +28,7 @@ flipbook(book, 'div-id', (err, viewer) => {
   if(err) console.error(err);
 
   console.log('Number of pages: ' + viewer.page_count);
-  viewer.on('seen', n => console.log('page number: ' + n));
+  viewer.addEventListener('seen', n => console.log('page number: ' + n));
 
   next.onclick = () => viewer.flip_forward();
   prev.onclick = () => viewer.flip_back();
@@ -77,7 +77,7 @@ flipbook(book, 'div-id', opts, (err, viewer) => ...
 You can listen on the `viewer` for which pages were seen:
 
 ```js
-viewer.on('seen', n => ...)
+viewer.addEventListener('seen', n => ...)
 ```
 
 ## Programmatic API
